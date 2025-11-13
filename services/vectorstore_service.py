@@ -20,7 +20,7 @@ class VectorStoreService:
     
     def _load_chroma_db(self) -> VectorStore:
         embeddings = UpstageEmbeddings(
-            model = get_settings().get_embedding_model()
+            model = get_settings().get_embedding_model_name()
         )
         
         # 임시
@@ -51,5 +51,8 @@ class VectorStoreService:
     
     def get_vectorstore(self) -> VectorStore:
         return self._database
+    
+    def search(self, query: str, k: int = 4):
+        return self._database.similarity_search(query, k)
     
 vector_store_service = VectorStoreService()

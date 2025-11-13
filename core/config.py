@@ -9,20 +9,14 @@ class Settings(BaseSettings):
     OPENAI_EMBEDDING_MODEL: OpenAIEmbeddingModel | None = None
     UPSTAGE_EMBEDDING_MODEL: UpstageEmbeddingModel | None = UpstageEmbeddingModel.EMBEDDING_QUERY
 
-    def get_embedding_model(self) -> str:
+    def get_embedding_model_name(self) -> str:
         if self.LLM_PROVIDER == LLMProvider.UPSTAGE:
             if self.UPSTAGE_EMBEDDING_MODEL is None:
-                raise ValueError(
-                    "UPSTAGE_EMBEDDING_MODEL is not configured. "
-                    "Please set UPSTAGE_EMBEDDING_MODEL environment variable."
-                )
+                return None
             return self.UPSTAGE_EMBEDDING_MODEL.value
         if self.LLM_PROVIDER == LLMProvider.OPENAI:
             if self.OPENAI_EMBEDDING_MODEL is None:
-                raise ValueError(
-                    "OPENAI_EMBEDDING_MODEL is not configured. "
-                    "Please set OPENAI_EMBEDDING_MODEL environment variable."
-                )
+                return None
             return self.OPENAI_EMBEDDING_MODEL.value
         return None
     

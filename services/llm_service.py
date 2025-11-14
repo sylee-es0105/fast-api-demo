@@ -6,13 +6,13 @@ from core.config import get_settings
 from dotenv import load_dotenv
 load_dotenv()
 
-class llmService:
+class LlmService:
     _instance = None
     _llm: BaseChatModel | None = None
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(llmService, cls).__new__(cls)
+            cls._instance = super(LlmService, cls).__new__(cls)
         return cls._instance
     
     def __init__(self):
@@ -51,4 +51,4 @@ class llmService:
     def get_llm(self) -> BaseChatModel:
         return self._llm
     
-llm_service = llmService()
+llm_service = LlmService()

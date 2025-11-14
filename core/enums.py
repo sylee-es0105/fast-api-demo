@@ -1,5 +1,6 @@
 from enum import Enum
 
+# TODO enum 대신에 langchain에 기능 있는지 찾아보기
 class VectorDBProvider(str, Enum):
     CHROMA = "chroma"
 
